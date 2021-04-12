@@ -1,13 +1,16 @@
 const help = (prefix) => {
 	return `
 ┏━━❉ *Acerca del BOT* ❉━━━┓
-┣⊱ _*Nombre*_ : Soporte y Aaportes BOT
+┣⊱ _*Nombre*_ : Soporte y Aportes BOT
 ┣⊱ *Grupo WP* : https://chat.whatsapp.com/DgbbzASKf1M6J6s53GO5hx
 ┣⊱ *Grupo TG* : https://t.me/soporteyapps
 ┣⊱ *Creador* : JDMTECH
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ======== _*Menu Comandos*_ =========
-
+_*Links Grupales*_
+comando : *${prefix}linkgroup* or *${prefix}link2*
+descripcion : muestra el link del grupo / o los link del grupo 
+note : solo se puede usar cuando el bot se convierte en administrador, ¡y el que envía el comando es administrador! \n
 
 > *Sticker Commands* <
 command : *${prefix}sticker* or *${prefix}stiker*
@@ -80,10 +83,7 @@ command : *${prefix}demote*
 desc : make the group admin as group member
 usage : *${prefix}demote @tagmember*\n
 note : can only be used when the bot becomes admin, and the one who sends the command is admin!\n
-command : *${prefix}linkgroup*
-desc : take the group link
-usage : just send the command
-note : can only be used when the bot becomes admin, and the one who sends the command is admin!\n
+
 command : *${prefix}leave*
 desc : Make bot leave the group
 usage : just send the command
