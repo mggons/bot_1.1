@@ -1,11 +1,11 @@
 const help = (prefix) => {
 	return `
-┏━━❉ *About User* ❉━━━┓
-┣⊱ *numero* : wa.me/${sender.split("@")[0]}
-┣⊱ *Grupo oficial* : https://chat.whatsapp.com/DgbbzASKf1M6J6s53GO5hx
-┣⊱ *Grupo oficial 2* : https://t.me/soporteyapps
+┏━━❉ *Acerca del BOT* ❉━━━┓
+┣⊱ _*Nombre*_ : Soporte y Aaportes BOT
+┣⊱ *Grupo WP* : https://chat.whatsapp.com/DgbbzASKf1M6J6s53GO5hx
+┣⊱ *Grupo TG* : https://t.me/soporteyapps
 ┣⊱ *Creador* : JDMTECH
-┗━━━━━━━━━━━━━━━━━━━━━━
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ======== _*Menu Comandos*_ =========
 
 
