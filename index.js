@@ -78,7 +78,7 @@ async function starts() {
 				} catch {
 					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 				}
-				teks = `Sayonara @${num.split('@')[0]}👋`
+				teks = `Te hemos expulsado por no aprovacion y aportacion,\n lo sentimos pero debo controlar a los que donan y aportan @${num.split('@')[0]}👋`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			}
@@ -578,8 +578,8 @@ async function starts() {
 					teks = (args.length > 1) ? body.slice(8).trim() : ''
 					teks += '\n\n'
 					for (let mem of groupMembers) {
-						teks += `╠➥ https://wa.me/${mem.jid.split('@')[0]}\n`
-						members_id.push(mem.jid)
+					teks += `╠➥ https://wa.me/${mem.jid.split('@')[0]}\n`
+					members_id.push(mem.jid)
 					}
 					client.sendMessage(from, teks, text, {detectLinks: false, quoted: mek})
 					break
@@ -624,7 +624,7 @@ async function starts() {
 						mentions(from, mentioned, true)
 						client.groupRemove(from, mentioned)
 					} else {
-						mentions(`Berhasil Promote @${mentioned[0].split('@')[0]} Sebagai Admin Group!`, mentioned, true)
+						mentions(`Haz sido promovido  @${mentioned[0].split('@')[0]} ¡Como administrador de grupo!, Felicidades 😄 `, mentioned, true)
 						client.groupMakeAdmin(from, mentioned)
 					}
 					break
@@ -642,7 +642,7 @@ async function starts() {
 						mentions(teks, mentioned, true)
 						client.groupRemove(from, mentioned)
 					} else {
-						mentions(`Berhasil Demote @${mentioned[0].split('@')[0]} Menjadi Member Group!`, mentioned, true)
+						mentions(`Por tu falta de compromiso @${mentioned[0].split('@')[0]} te hemos quitado de la administracion del grupo, Lo sentimos ☹️`, mentioned, true)
 						client.groupDemoteAdmin(from, mentioned)
 					}
 					break
@@ -674,7 +674,7 @@ async function starts() {
 						mentions(teks, mentioned, true)
 						client.groupRemove(from, mentioned)
 					} else {
-						mentions(`Perintah di terima, mengeluarkan : @${mentioned[0].split('@')[0]}`, mentioned, true)
+						mentions(`La orden fue recibida, emitida: @${mentioned[0].split('@')[0]}`, mentioned, true)
 						client.groupRemove(from, mentioned)
 					}
 					break
@@ -688,13 +688,15 @@ async function starts() {
 					}
 					mentions(teks, groupAdmins, true)
 					break
-                case 'linkgroup':
+					
+                case 'linkgroup': //link de el grupo 
                     if (!isGroup) return reply(mess.only.group)
                     if (!isGroupAdmins) return reply(mess.only.admin)
                     if (!isBotGroupAdmins) return reply(mess.only.Badmin)
                     linkgc = await client.groupInviteCode(from)
                     reply('https://chat.whatsapp.com/'+linkgc)
                     break
+					
                 case 'leave':
                     if (!isGroup) return reply(mess.only.group)
                     if (isGroupAdmins || isOwner) {
@@ -703,6 +705,7 @@ async function starts() {
                         reply(mess.only.admin)
                     }
                     break
+					
 				case 'toimg':
 					if (!isQuotedSticker) return reply('❌ responde la pegatina um ❌')
 					reply(mess.wait)
