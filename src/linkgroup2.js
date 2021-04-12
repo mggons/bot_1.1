@@ -1,2 +1,0 @@
-const help = (prefix) => {
-	return `
