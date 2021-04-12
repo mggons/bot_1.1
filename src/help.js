@@ -2,6 +2,16 @@ const help = (prefix) => {
 	return `
 ====== _*Soporte y Aportes BOT*_ ======\n========= *By: JDMTECH* ==========\n======== _*Menu Comandos*_ =========
 
+┏━━❉ *About User* ❉━━━┓
+┣⊱ *Nombre* : ${pushname}
+┣⊱ *numero* : wa.me/${sender.split("@")[0]}
+┣⊱ *Grupo oficial* : https://chat.whatsapp.com/DgbbzASKf1M6J6s53GO5hx
+┣⊱ *Grupo oficial 2* : https://t.me/soporteyapps
+┣⊱ *Creador* : JDMTECH
+┗━━━━━━━━━━━━━━━━━━━━━━
+
+
+
 > *Sticker Commands* <
 command : *${prefix}sticker* or *${prefix}stiker*
 desc : convert image/gif/video to sticker
