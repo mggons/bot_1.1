@@ -24,17 +24,14 @@ const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
 const setting = JSON.parse(fs.readFileSync('./src/link2.js'))
-/********** MENU SETTING **********/
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
             + 'FN:JDMTECH\n' 
             + 'ORG: Soporte y Aportes Community;\n' 
             + 'TEL;type=CELL;type=VOICE;waid=573144182071:+57 314-418-2071\n' 
             + 'END:VCARD' 
-
-/******** OWNER NUMBER**********/
 const ownerNumber = ["573144182071@s.whatsapp.net","573144182071@s.whatsapp.net"] 
-/************************************/
+
 prefix = setting.prefix
 blocked = []
 
@@ -491,7 +488,7 @@ async function starts() {
 				 case 'ytmp3':
                     			if (args.length < 1) return reply('Y el url?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //Modificado By Mggons
 					if (anu.error) return reply(anu.error)
 					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}`
 					thumb = await getBuffer(anu.thumb)
@@ -507,7 +504,7 @@ async function starts() {
 					if (isLimit(sender)) return reply(ind.limitend(pusname))
 					if (args.length < 1) return reply('Y el url?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'})
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'}) //Modificado By Mggons
 					if (anu.error) return reply(anu.error)
 					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}`
 					thumb = await getBuffer(anu.thumb)
@@ -517,10 +514,10 @@ async function starts() {
 					await limitAdd(sender)
 				break 
 					
-					
+	
 				case 'ytsearch':
 					if (args.length < 1) return reply('¿Qué estás buscando?,¿Algun tema? ')
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'})
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'}) //Modificado by Mggons
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result) {
