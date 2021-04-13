@@ -20,11 +20,11 @@ const { removeBackgroundFromImageFile } = require('remove.bg')
 const lolis = require('lolis.life')
 const loli = new lolis()
 const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
-const welkomusic = JSON.parse(fs.readFileSync('./src/welkomusic.json'))
+const wmusica = JSON.parse(fs.readFileSync('./src/wmusica.json')) //añadida entrada para grupo de musica
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
-
+//Añadida entrada de OWNER //
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
             + 'FN:Admin JDMTECH SyA\n' 
@@ -96,8 +96,8 @@ async function starts() {
 		}
 	})
 	
-	client.on('group-participants-update', async (anu) => {
-		if (!welkomusic.includes(anu.jid)) return
+	client.on('group-participants-update', async (anu) => { 
+		if (!wmusica.includes(anu.jid)) return
 		try {
 			const mdata = await client.groupMetadata(anu.jid)
 			console.log(anu)
@@ -106,9 +106,9 @@ async function starts() {
 				try {
 					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
 				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+					ppimg = 'https://i.pinimg.com/236x/e8/b0/d2/e8b0d26658598ea5a192b8d777d7e691.jpg'
 				}
-				teks = `Hola @${num.split('@')[0]}\n Te damos la bienvenida a *${mdata.subject}* \n espero que el grupo\n sea de tu agrado. ^.^, recuerda leer la Descripcion`
+				teks = `Hola @${num.split('@')[0]}\n Te damos la bienvenida a *${mdata.subject}* \n espero que el grupo\n sea de tu agrado. ^.^, \nPara descargar audio usa #mp3 + 'Link de video' \nPara descargar Video usa #mp4 + 'Link de video'`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
@@ -116,7 +116,7 @@ async function starts() {
 				try {
 					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
 				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+					ppimg = 'http://pa1.narvii.com/6412/fe4648f79f54789195ace50a4650a7cfc0c7f8b0_00.gif'
 				}
 				teks = `Te hemos expulsado por no aprovacion y aportacion,\n lo sentimos pero debo controlar a los que donan y aportan @${num.split('@')[0]}👋`
 				let buff = await getBuffer(ppimg)
@@ -148,7 +148,7 @@ async function starts() {
 			const type = Object.keys(mek.message)[0]
 			const apiKey = setting.apiKey // contact me on whatsapp wa.me/6285892766102
 			const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
-			const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+			const time = moment.tz('America/Bogota').format('DD/MM HH:mm:ss') //cambio de Zona horaria
 			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
 			budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
 			const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
@@ -183,7 +183,7 @@ async function starts() {
 			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isWelkom = isGroup ? welkom.includes(from) : false
-			const isWelkomusic = isGroup ? welkomusic.includes(from) : false
+			const isWelkomusic = isGroup ? wmusica.includes(from) : false
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
@@ -465,9 +465,9 @@ async function starts() {
 						reply(`Envía fotos con subtítulos  ${prefix}pegatinas o etiquetas de imagen que se han enviado `)
 					}
 					break
-				case 'gtts':
+				case 'tts':
 					if (args.length < 1) return client.sendMessage(from, '¿Dónde está el código de idioma?', text, {quoted: mek})
-					const gtts = require('./lib/gtts')(args[0])
+					const gtts = require('./lib/tts')(args[0])
 					if (args.length < 2) return client.sendMessage(from, '¿Dónde está el texto?', text, {quoted: mek})
 					dtt = body.slice(9)
 					ranm = getRandom('.mp3')
@@ -517,10 +517,10 @@ async function starts() {
 					reply(anu.result)
 					break*/
 					
-				 case 'ytmp3':
-                    			if (args.length < 1) return reply('Y el url?')
+				 case 'mp3':  //modificaciones de JDMTECH
+                    			if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //Modificado By Mggons
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}`
 					thumb = await getBuffer(anu.thumb)
@@ -530,10 +530,10 @@ async function starts() {
 					await limitAdd(sender)
 					break
 					
-				  case 'ytmp4':
-					if (args.length < 1) return reply('Y el url?')
+				  case 'mp4':  //modificaciones de JDMTECH
+					if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'}) //Modificado By Mggons
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'}) //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}`
 					thumb = await getBuffer(anu.thumb)
@@ -546,7 +546,7 @@ async function starts() {
 	
 				case 'ytsearch':
 					if (args.length < 1) return reply('¿Qué estás buscando?,¿Algun tema? ')
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${args[0]} `, {method: 'q'}) //Modificado by Mggons
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${args[0]} `, {method: 'q'}) //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result) {
@@ -598,7 +598,7 @@ async function starts() {
 					buff = await getBuffer(anu.result)
 					client.sendMessage(from, buff, image, {quoted: mek})
 					break
-				case 'tstiker':
+				/*ase 'tstiker':
 				case 'tsticker':
 					if (args.length < 1) return reply('¿Dónde está el texto, eh?')
 					ranp = getRandom('.png')
@@ -616,8 +616,8 @@ async function starts() {
 					})
 					/*client.sendMessage(from, fs.readFileSync(rano), sticker, {quoted: mek})
 					fs.unlinkSync(rano)*/
-					})
-					break
+					/*
+					break*/
 				case 'tagall':
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -630,7 +630,7 @@ async function starts() {
 					}
 					mentions(teks, members_id, true)
 					break
-                                case 'tagall2':
+                               /*ase 'tagall2':
 					members_id = []
 					teks = (args.length > 1) ? body.slice(8).trim() : ''
 					teks += '\n\n'
@@ -649,13 +649,13 @@ async function starts() {
 					members_id.push(mem.jid)
 					}
 					client.sendMessage(from, teks, text, {detectLinks: false, quoted: mek})
-					break
+					break*/
 				case 'clearall':
 					if (!isOwner) return reply('¿Quién es usted?')
 					anu = await client.chats.all()
 					client.setMaxListeners(25)
 					for (let _ of anu) {
-						client.deleteChat(_.jid)
+					client.deleteChat(_.jid)
 					}
 					reply('eliminar todo el chat completado :) ')
 					break
@@ -818,12 +818,12 @@ async function starts() {
 					if (args.length < 1) return reply('Hmmmm')
 					if (Number(args[0]) === 1) {
 						if (isWelkom) return reply('Ya activo.. ')
-						welkom1.push(from)
-						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom1))
+						wmusica.push(from)
+						fs.writeFileSync('./src/wmusica.json', JSON.stringify(wmusica))
 						reply('Activó con éxito la función de bienvenida en este grupo ✔️')
 					} else if (Number(args[0]) === 0) {
-						welkom1.splice(from, 1)
-						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom1))
+						wmusica.splice(from, 1)
+						fs.writeFileSync('./src/wmusica.json', JSON.stringify(wmusica))
 						reply('Desactivado con éxito la función de bienvenida en este grupo ✔️')
 					} else {
 						reply('1 para activar, 0 para desactivar')
