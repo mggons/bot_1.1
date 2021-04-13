@@ -20,7 +20,7 @@ const { removeBackgroundFromImageFile } = require('remove.bg')
 const lolis = require('lolis.life')
 const loli = new lolis()
 const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
-const welkom1 = JSON.parse(fs.readFileSync('./src/welkom1.json'))
+const welkomusic = JSON.parse(fs.readFileSync('./src/welkomusic.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
@@ -97,7 +97,7 @@ async function starts() {
 	})
 	
 	client.on('group-participants-update', async (anu) => {
-		if (!welkom1.includes(anu.jid)) return
+		if (!welkomusic.includes(anu.jid)) return
 		try {
 			const mdata = await client.groupMetadata(anu.jid)
 			console.log(anu)
@@ -183,6 +183,7 @@ async function starts() {
 			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isWelkom = isGroup ? welkom.includes(from) : false
+			const isWelkomusic = isGroup ? welkomusic.includes(from) : false
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
@@ -268,7 +269,7 @@ async function starts() {
 				case 'info':
 					me = client.user
 					uptime = process.uptime()
-					teks = `*Nama bot* : ${me.name}\n*Nomor Bot* : @${me.jid.split('@')[0]}\n*Prefix* : ${prefix}\n*Total Block Contact* : ${blocked.length}\n*The bot is active on* : ${kyun(uptime)}`
+					teks = `*Nama bot* : ${me.name}\n*Nombre Bot* : @${me.jid.split('@')[0]}\n*Prefix* : ${prefix}\n*Total Contactos Bloqueados* : ${blocked.length}\n*El bot inicio actividad* : ${kyun(uptime)}`
 					buffer = await getBuffer(me.imgUrl)
 					client.sendMessage(from, buffer, image, {caption: teks, contextInfo:{mentionedJid: [me.jid]}})
 					break
@@ -286,13 +287,13 @@ async function starts() {
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						reply(mess.wait)
 						await recognize(media, {lang: 'eng+ind', oem: 1, psm: 3})
-							.then(teks => {
-								reply(teks.trim())
-								fs.unlinkSync(media)
+						.then(teks => {
+							reply(teks.trim())
+							fs.unlinkSync(media)
 							})
-							.catch(err => {
-								reply(err.message)
-								fs.unlinkSync(media)
+						.catch(err => {
+							reply(err.message)
+							fs.unlinkSync(media)
 							})
 					} else {
 						reply('Solo una foto, hermano')
@@ -811,7 +812,7 @@ async function starts() {
 					}
 					break
 									
-				case 'welcomemusic':
+				case 'welcomusic':
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (args.length < 1) return reply('Hmmmm')
