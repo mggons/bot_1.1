@@ -24,6 +24,17 @@ const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
 const setting = JSON.parse(fs.readFileSync('./src/link2.js'))
+/********** MENU SETTING **********/
+const vcard = 'BEGIN:VCARD\n' 
+            + 'VERSION:3.0\n' 
+            + 'FN:JDMTECH\n' 
+            + 'ORG: Soporte y Aportes Community;\n' 
+            + 'TEL;type=CELL;type=VOICE;waid=573144182071:+57 314-418-2071\n' 
+            + 'END:VCARD' 
+
+/******** OWNER NUMBER**********/
+const ownerNumber = ["573144182071@s.whatsapp.net","573144182071@s.whatsapp.net"] 
+/************************************/
 prefix = setting.prefix
 blocked = []
 
@@ -214,17 +225,18 @@ async function starts() {
 
 			}
 			switch(command) {
-					
+				
+				case 'help':
+				case 'menu':
+					client.sendMessage(from, help(prefix), text)
+					break
+										
 				case 'owner':
          	   		case 'creator':
                   			client.sendMessage(from, {displayname: "JDMTECH", vcard: vcard}, MessageType.contact, { quoted: mek})
                   			client.sendMessage(from, '*El número de mi dueño >_<, no spam o te bloqueo*',MessageType.text, { quoted: mek} )
 					break    
 					
-				case 'help':
-				case 'menu':
-					client.sendMessage(from, help(prefix), text)
-					break
 				case 'info':
 					me = client.user
 					uptime = process.uptime()
