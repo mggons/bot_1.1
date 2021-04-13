@@ -26,7 +26,7 @@ const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
 
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
-            + 'FN:JDMTECH\n' 
+            + 'FN:Admin JDMTECH SyA\n' 
             + 'ORG: Soporte y Aportes Community;\n' 
             + 'TEL;type=CELL;type=VOICE;waid=573144182071:+57 314-418-2071\n' 
             + 'END:VCARD' 
@@ -228,7 +228,7 @@ async function starts() {
 					break
 										
 				case 'owner':
-         	   		case 'creator':
+         	   		case 'admincreator':
                   			client.sendMessage(from, {displayname: "JDMTECH", vcard: vcard}, MessageType.contact, { quoted: mek})
                   			client.sendMessage(from, '*El número de mi dueño >_<, no spam o te bloqueo*',MessageType.text, { quoted: mek} )
 					break    
