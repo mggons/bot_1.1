@@ -266,13 +266,13 @@ async function starts() {
                   			client.sendMessage(from, '*El número de mi dueño >_<, no spam o te bloqueo*',MessageType.text, { quoted: mek} )
 					break    
 					
-				case 'info':
+				/*case 'info':
 					me = client.user
 					uptime = process.uptime()
-					teks = `*Nama bot* : ${me.name}\n*Nombre Bot* : @${me.jid.split('@')[0]}\n*Prefix* : ${prefix}\n*Total Contactos Bloqueados* : ${blocked.length}\n*El bot inicio actividad* : ${kyun(uptime)}`
+					teks = `*Nombre Bot* : ${me.name}\n*Nombre Bot* : @${me.jid.split('@')[0]}\n*Prefix* : ${prefix}\n*Total Contactos Bloqueados* : ${blocked.length}\n*El bot inicio actividad* : ${kyun(uptime)}`
 					buffer = await getBuffer(me.imgUrl)
 					client.sendMessage(from, buffer, image, {caption: teks, contextInfo:{mentionedJid: [me.jid]}})
-					break
+					break*/
 				case 'blocklist':
 					teks = 'Esta es la lista de números bloqueados :\n'
 					for (let block of blocked) {
@@ -422,7 +422,6 @@ async function starts() {
 						ranw = getRandom('.webp')
 						ranp = getRandom('.png')
 						reply(mess.wait)
-						keyrmbg = 'Your-ApiKey'
 						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg, size: 'auto', type: 'auto', ranp}).then(res => {
 							fs.unlinkSync(media)
 							let buffer = Buffer.from(res.base64img, 'base64')
