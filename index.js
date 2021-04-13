@@ -516,7 +516,7 @@ async function starts() {
 	
 				case 'ytsearch':
 					if (args.length < 1) return reply('¿Qué estás buscando?,¿Algun tema? ')
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'}) //Modificado by Mggons
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=`, {method: 'get'}) //Modificado by Mggons
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result) {
