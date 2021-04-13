@@ -31,7 +31,6 @@ const vcard = 'BEGIN:VCARD\n'
             + 'TEL;type=CELL;type=VOICE;waid=573144182071:+57 314-418-2071\n' 
             + 'END:VCARD' 
 const ownerNumber = ["573144182071@s.whatsapp.net","573144182071@s.whatsapp.net"] 
-
 prefix = setting.prefix
 blocked = []
 
