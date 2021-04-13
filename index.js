@@ -26,17 +26,6 @@ const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
 const setting = JSON.parse(fs.readFileSync('./src/link2.js'))
 prefix = setting.prefix
 blocked = []
-/********** MENU SETTING **********/
-const vcard = 'BEGIN:VCARD\n' 
-            + 'VERSION:3.0\n' 
-            + 'FN:JDMTECH\n' 
-            + 'ORG: Soporte y Aportes Community;\n' 
-            + 'TEL;type=CELL;type=VOICE;waid=573144182071:+57 314-418-2071\n' 
-            + 'END:VCARD' 
-
-/******** OWNER NUMBER**********/
-const ownerNumber = ["573144182071@s.whatsapp.net","573144182071@s.whatsapp.net"] 
-/************************************/
 
 function kyun(seconds){
   function pad(s){
