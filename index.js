@@ -23,7 +23,7 @@ const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
-const setting = JSON.parse(fs.readFileSync('./src/link2.js'))
+const link2 = JSON.parse(fs.readFileSync('./src/link2.js'))
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
             + 'FN:JDMTECH\n' 
