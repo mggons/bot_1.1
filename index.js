@@ -23,7 +23,7 @@ const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
-const link2 = JSON.parse(fs.readFileSync('./src/link2.js'))
+
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
             + 'FN:JDMTECH\n' 
@@ -465,9 +465,9 @@ async function starts() {
 					break
 				case 'loli':
 					loli.getSFWLoli(async (err, res) => {
-						if (err) return reply('❌ *ERROR* ❌')
-						buffer = await getBuffer(res.url)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: '¡Mira! Otra Loli'})
+					if (err) return reply('❌ *ERROR* ❌')
+					buffer = await getBuffer(res.url)
+					client.sendMessage(from, buffer, image, {quoted: mek, caption: '¡Mira! Otra Loli'})
 					})
 					break
 				/*case 'nsfwloli':
@@ -535,15 +535,15 @@ async function starts() {
 					break
 				case 'tiktokstalk':
 					try {
-						if (args.length < 1) return client.sendMessage(from, '¿Dónde está el nombre de usuario, eh?', text, {quoted: mek})
-						let { user, stats } = await tiktod.getUserProfileInfo(args[0])
-						reply(mess.wait)
-						teks = `*ID* : ${user.id}\n*Username* : ${user.uniqueId}\n*Nickname* : ${user.nickname}\n*Followers* : ${stats.followerCount}\n*Followings* : ${stats.followingCount}\n*Posts* : ${stats.videoCount}\n*Luv* : ${stats.heart}\n`
-						buffer = await getBuffer(user.avatarLarger)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: teks})
+					if (args.length < 1) return client.sendMessage(from, '¿Dónde está el nombre de usuario, eh?', text, {quoted: mek})
+					let { user, stats } = await tiktod.getUserProfileInfo(args[0])
+					reply(mess.wait)
+					teks = `*ID* : ${user.id}\n*Username* : ${user.uniqueId}\n*Nickname* : ${user.nickname}\n*Followers* : ${stats.followerCount}\n*Followings* : ${stats.followingCount}\n*Posts* : ${stats.videoCount}\n*Luv* : ${stats.heart}\n`
+					buffer = await getBuffer(user.avatarLarger)
+					client.sendMessage(from, buffer, image, {quoted: mek, caption: teks})
 					} catch (e) {
-						console.log(`Error :`, color(e,'red'))
-						reply('Posible nombre de usuario no válido')
+					console.log(`Error :`, color(e,'red'))
+					reply('Posible nombre de usuario no válido')
 					}
 					break
 				case 'nulis':
@@ -577,15 +577,15 @@ async function starts() {
 					anu = await fetchJson(`https://mhankbarbar.moe/api/text2image?text=${teks}&apiKey=${apiKey}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					exec(`wget ${anu.result} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (err) => {
-						fs.unlinkSync(ranp)
-						if (err) return reply(mess.error.stick)
-						exec(`webpmux -set exif ${addMetadata('BOT', authorname)} ${rano} -o ${rano}`, async (error) => {
-							if (error) return reply(mess.error.stick)
-							client.sendMessage(from, fs.readFileSync(rano), sticker, {quoted: mek})
-							fs.unlinkSync(rano)
-						})
-						/*client.sendMessage(from, fs.readFileSync(rano), sticker, {quoted: mek})
-						fs.unlinkSync(rano)*/
+					fs.unlinkSync(ranp)
+					if (err) return reply(mess.error.stick)
+					exec(`webpmux -set exif ${addMetadata('BOT', authorname)} ${rano} -o ${rano}`, async (error) => {
+					if (error) return reply(mess.error.stick)
+					client.sendMessage(from, fs.readFileSync(rano), sticker, {quoted: mek})
+					fs.unlinkSync(rano)
+					})
+					/*client.sendMessage(from, fs.readFileSync(rano), sticker, {quoted: mek})
+					fs.unlinkSync(rano)*/
 					})
 					break
 				case 'tagall':
@@ -604,7 +604,7 @@ async function starts() {
 					members_id = []
 					teks = (args.length > 1) ? body.slice(8).trim() : ''
 					teks += '\n\n'
-					for (let mem of adminsMembers) {
+					for (let mem of groupMembers) {
 						teks += `╠➥ @${mem.jid.split('@')[0]}\n`
 						members_id.push(mem.jid)
 					}
@@ -726,22 +726,22 @@ async function starts() {
 					mentions(teks, groupAdmins, true)
 					break
 					
-                case 'linkgroup': //link de el grupo 
-                    if (!isGroup) return reply(mess.only.group)
-                    if (!isGroupAdmins) return reply(mess.only.admin)
-                    if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-                    linkgc = await client.groupInviteCode(from)
-                    reply('https://chat.whatsapp.com/'+linkgc)
-                    break
+                		case 'linkgroup': //link de el grupo 
+                    			if (!isGroup) return reply(mess.only.group)
+                    			if (!isGroupAdmins) return reply(mess.only.admin)
+                    			if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+                    			linkgc = await client.groupInviteCode(from)
+                    			reply('https://chat.whatsapp.com/'+linkgc)
+                    			break
 					
-                case 'leave':
-                    if (!isGroup) return reply(mess.only.group)
-                    if (isGroupAdmins || isOwner) {
-                    	client.groupLeave(from)
-                    } else {
-                        reply(mess.only.admin)
-                    }
-                    break
+                		case 'leave':
+                    			if (!isGroup) return reply(mess.only.group)
+                    			if (isGroupAdmins || isOwner) {
+                    			client.groupLeave(from)
+                    			} else {
+                        		reply(mess.only.admin)
+                    			}
+                    			break
 					
 				case 'toimg':
 					if (!isQuotedSticker) return reply('❌ responde la pegatina um ❌')
