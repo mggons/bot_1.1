@@ -108,7 +108,7 @@ async function starts() {
 				} catch {
 					ppimg = 'https://i.pinimg.com/236x/e8/b0/d2/e8b0d26658598ea5a192b8d777d7e691.jpg'
 				}
-				teks = `Hola @${num.split('@')[0]}\n Te damos la bienvenida a *${mdata.subject}* \n espero que el grupo\n sea de tu agrado. ^.^, \nPara descargar audio usa #mp3 + 'Link de video' \nPara descargar Video usa #mp4 + 'Link de video'`
+				teks = `Hola @${num.split('@')[0]}\n Te damos la bienvenida a *${mdata.subject}* \n espero que el grupo sea de tu agrado. ^.^, \nPara descargar audio usa *#mp3 + 'Link de video'* \nPara descargar Video usa *#mp4 + 'Link de video'*\n recuerda los videos deben ser de Youtube`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
@@ -118,7 +118,7 @@ async function starts() {
 				} catch {
 					ppimg = 'http://pa1.narvii.com/6412/fe4648f79f54789195ace50a4650a7cfc0c7f8b0_00.gif'
 				}
-				teks = `Te hemos expulsado por no aprovacion y aportacion,\n lo sentimos pero debo controlar a los que donan y aportan @${num.split('@')[0]}👋`
+				teks = `Te hemos expulsado por no participacion,\n lo sentimos muchos y que tengas buen dia. @${num.split('@')[0]}👋`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			}
