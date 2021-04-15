@@ -24,7 +24,7 @@ const help = (prefix) => {
 ┣⊱ ${prefix}stiker -> Convierte imagen a sticker
 ┣⊱ ${prefix} 
 ┣⊱ ${prefix} 
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
 }
 
 exports.help = help
