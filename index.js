@@ -521,7 +521,7 @@ async function starts() {
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}\n*result* : ${anu.result}`
+					teks = `*Title* : ${anu.title}\n*Size 128Kbps* : ${anu.filesize}\n*result* : ${anu.result}`
 					thumb = await getBuffer(anu.thumb)
 					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result)
