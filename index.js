@@ -606,9 +606,10 @@ async function starts() {
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Filename* : ${anu.filename}\n*url* : ${anu.url}\n*Size* : ${anu.filesize}\n*uploaded* : ${anu.uploaded}\n*filetype* : ${anu.filetype}\n*desc* : ${anu.desc}`
-					client.sendMessage(from, Filename, url, filetype, desc, {quoted: mek, caption: teks})
+					client.sendMessage(from, filename, url, filetype, desc, {quoted: mek, caption: teks})
 					await limitAdd(sender)
 					break
+					
 				/*ase 'tstiker':
 				case 'tsticker':
 					if (args.length < 1) return reply('¿Dónde está el texto, eh?')
