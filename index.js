@@ -44,7 +44,7 @@ function kyun(seconds){
   var seconds = Math.floor(seconds % 60);
 
   //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
-  return `${pad(hours)} Jam ${pad(minutes)} Menit ${pad(seconds)} Detik`
+  return `${pad(hours)} Horas ${pad(minutes)} Minutos ${pad(seconds)} Segundos`
 }
 
 async function starts() {
@@ -170,7 +170,7 @@ async function starts() {
 					Badmin: '❌ ¡Este comando solo se puede usar cuando el bot se convierte en administrador! ❌'
 				}
 			}
-
+			const speed = require('performance-now');
 			const botNumber = client.user.jid
 			const ownerNumber = [`${setting.ownerNumber}@s.whatsapp.net`] // replace this with your number
 			const isGroup = from.endsWith('@g.us')
