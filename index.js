@@ -184,7 +184,6 @@ async function starts() {
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isWelkom = isGroup ? welkom.includes(from) : false
 			const isWelkomusic = isGroup ? wmusica.includes(from) : false
-			const isfilename = isGroup ? filename.includes(from) : false
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
@@ -528,7 +527,6 @@ async function starts() {
 					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
-					await limitAdd(sender)
 					break
 					
 				  case 'mp4':  //modificaciones de JDMTECH
@@ -541,8 +539,7 @@ async function starts() {
 					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
-					await limitAdd(sender)
-				break 
+					break 
 					
 	
 				case 'ytsearch':
@@ -555,6 +552,7 @@ async function starts() {
 					}
 					reply(teks.trim())
 					break
+					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
 					if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.error.Iv)
@@ -666,7 +664,7 @@ async function starts() {
 				case 'clearall':
 					if (!isOwner) return reply('¿Quién es usted?')
 					anu = await client.chats.all()
-					client.setMaxListeners(25)
+					client.setMaxListeners(30)
 					for (let _ of anu) {
 					client.deleteChat(_.jid)
 					}
