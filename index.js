@@ -159,8 +159,8 @@ async function starts() {
 				wait: '⌛ En proceso  ⌛',
 				success: '✔️ Completado ✔️',
 				error: {
-					stick: '❌ Falló, se produjo un error al convertir la imagen en una pegatina  ❌',
-					Iv: '❌ Enlace inválido  ❌'
+					stick: '❌ Falló, se produjo un error al convertir la imagen en una pegatina ❌',
+					Iv: '❌ Enlace inválido ❌'
 				},
 				only: {
 					group: '❌ ¡Este comando solo se puede usar en grupos! ❌',
@@ -266,6 +266,13 @@ async function starts() {
                   			client.sendMessage(from, '*El número de mi dueño >_<, no spam o te bloqueo*',MessageType.text, { quoted: mek} )
 					break    
 					
+				case 'ping':
+                       			const timestamp = speed();
+                    			const latensi = speed() - timestamp
+                    			client.updatePresence(from, Presence.composing) 
+					uptime = process.uptime()
+                    			client.sendMessage(from, `Speed: *${latensi.toFixed(4)} _Segundos_*\nDispositivo: *Windows Server 2019*\nRAM: *12GB*\nRed: *LAN-1GB*\nStatus: *Online*\nTipo de BOT: *Termux Emulator*\n\n*El bot esta activo desde*\n*${kyun(uptime)}*`, text, { quoted: mek})
+                    			break
 				/*case 'info':
 					me = client.user
 					uptime = process.uptime()
