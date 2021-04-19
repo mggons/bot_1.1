@@ -550,15 +550,17 @@ async function starts() {
 					
 	
 				case 'ytsearch':
-					if (args.length < 1) return reply('¿Qué estás buscando?,¿Algun tema? ')
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${args[0]} `, {method: 'q'}) //modificaciones de JDMTECH
+					if (args.length < 1) return reply('Yang mau di cari apa?')
+					reply(mess.wait)
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result) {
-						teks += `*Title* : ${i.title}\n*Id* : ${i.id}\n*Published* : ${i.publishTime}\n*Duration* : ${i.duration}\n*Views* : ${h2k(i.views)}\n=================\n`
+						teks += `\`\`\`Título\`\`\` : *${i.title}*\n\`\`\`Link\`\`\` : *https://youtu.be/${i.id}*\n\`\`\`Publicados\`\`\` : *${i.uploadDate}*\n\`\`\`Duração\`\`\` : *${i.duration}*\n\`\`\`Visualizadores: \`\`\`*${h2k(i.viewCount)}*\n\`\`\`Canal:\`\`\` *${i.channel.name}*\n=================\n`
 					}
 					reply(teks.trim())
-					break
+					await limitAdd(sender) 
+					break 
 					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
