@@ -512,7 +512,7 @@ async function starts() {
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result){
-						teks += `*titulo* : *${i.title}*\n *link* : *https://youtu.be/${i.id}*\n*Publicado* : *${i.uploadDate}*\n*Duracion* : *${i.duration}*\n*Vistas* : *${h2k(i.viewCount)}*\n*Canal* : *${i.channel.name} *\n=================\n`
+						teks += `*titulo* : *${i.title}*\n *link* : *https://youtu.be/${i.id}*\n*Publicado* : *${i.uploadDate}*\n*Duracion* : *${i.duration}*\n*Vistas* : *${h2k(i.viewCount)}*\n=================\n`
 					}
 					reply(teks.trim())
 					await limitAdd(sender) 
