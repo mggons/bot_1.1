@@ -505,14 +505,14 @@ async function starts() {
 					break 
 					
 	
-				case 'ytsearch':
+				case 'ytsearch': //Modifcado 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
 					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytsearch/?q=${body.slice(10)&apikey=XinzBot}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
-					for (let i of anu.result [result : ${i.result}]){
-						teks += `\`\`\`Título\`\`\` : *${i.title}*\n\`\`\`Link\`\`\` : *https://youtu.be/${i.id}*\n\`\`\`Publicados\`\`\` : *${i.uploadDate}*\n\`\`\`Duracion\`\`\` : *${i.duration}*\n\`\`\`Visualizadores: \`\`\`*${h2k(i.viewCount)}*\n\`\`\`Canal:\`\`\` *${i.channel.name}*\n=================\n`
+					for (let i of anu.result){
+						teks += `*titulo* : *${i.title}*\n *link* : *https://youtu.be/${i.id}*\n*Publicado* : *${i.uploadDate}*\n*Duracion* : *${i.duration}*\n*Vistas* : *${h2k(i.viewCount)}*\n*Canal* : *${i.channel.name} *\n=================\n`
 					}
 					reply(teks.trim())
 					await limitAdd(sender) 
