@@ -505,10 +505,10 @@ async function starts() {
 					break 
 					
 	
-				/*case 'ytsearch':
+				case 'ytsearch':
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'})
+					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytsearch/?q=${body.slice(10)&apikey=XinzBot}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result [result : ${i.result}]){
@@ -516,7 +516,7 @@ async function starts() {
 					}
 					reply(teks.trim())
 					await limitAdd(sender) 
-					break */
+					break 
 					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
