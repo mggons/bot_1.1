@@ -261,82 +261,6 @@ async function starts() {
 
 
 			}
-async function handleCommand(m) {
-const messageType = Object.keys(m.message)[0];
-    if (
-      messageType == MessageType.image &&
-      m.message.imageMessage.url &&
-      m.message.imageMessage.caption == "!sticker"
-    ) {
-      let imageBuffer = await conn.downloadMediaMessage(m);
-      let sticker = await imageminWebp({ preset: "icon" })(imageBuffer);
-      await conn.sendMessage(m.key.remoteJid, sticker, MessageType.sticker);
-      console.log("Sticker enviado a : " + m.key.remoteJid);
-    } else if (
-      messageType == MessageType.video &&
-      m.message.videoMessage.url &&
-      m.message.videoMessage.caption == "#sticker"
-      m.message.videoMessage.caption == "#stiker"
-	  
-    ) {
-      let processOptions = {
-        fps: 16,
-        startTime: `00:00:00.0`,
-        endTime: `00:00:06.0`,
-        loop: 0,
-      };
-      const tempFile = path.join(
-        tmpdir(),
-        `processing.${Crypto.randomBytes(6).readUIntLE(0, 6).toString(36)}.webp`
-      );
-      let videoBuffer = await conn.downloadMediaMessage(m);
-      const videoStream = await streamifier.createReadStream(videoBuffer);
-      let success = await new Promise((resolve, reject) => {
-        var command = ffmpeg(videoStream)
-          .inputFormat("mp4")
-          .on("error", function (err) {
-            console.log("Ocurrió un error: " + err.message);
-            reject(err);
-          })
-          .on("start", function (cmd) {
-            console.log("Empezado" + cmd);
-          })
-          .addOutputOptions([
-            `-vcodec`,
-            `libwebp`,
-            `-vf`,
-            `crop=w='min(min(iw\,ih)\,512)':h='min(min(iw\,ih)\,512)',scale=150:150,setsar=1,fps=${processOptions.fps}`,
-            `-loop`,
-            `${processOptions.loop}`,
-            `-ss`,
-            processOptions.startTime,
-            `-t`,
-            processOptions.endTime,
-            `-preset`,
-            `default`,
-            `-an`,
-            `-vsync`,
-            `0`,
-            `-s`,
-            `512:512`,
-          ])
-          .toFormat("webp")
-          .on("end", () => {
-            resolve(true);
-          })
-          .saveToFile(tempFile);
-      });
-      if (!success) {
-        console.log("Error al procesar el video");
-        return;
-      }
-      var bufferwebp = await fs.readFileSync(tempFile);
-      await fs.unlinkSync(tempFile);
-      await conn.sendMessage(m.key.remoteJid, bufferwebp, MessageType.sticker);
-      console.log("Pegatina enviada a: " + m.key.remoteJid);
-    } 
-  }
-
 
 			switch(command) {
 				
@@ -446,7 +370,7 @@ const messageType = Object.keys(m.message)[0];
 						reply('Hay un error')
 					}
 					break
-				/*case 'stiker':
+				case 'stiker':
 				case 'sticker':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -472,7 +396,7 @@ const messageType = Object.keys(m.message)[0];
 								})
 								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
+								fs.unlinkSync(ran)*/
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -491,7 +415,7 @@ const messageType = Object.keys(m.message)[0];
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Falló, en el momento de la conversión ${tipe} a la pegatina ❌`)
+								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
 							})
 							.on('end', function () {
 								console.log('Finish')
@@ -503,7 +427,7 @@ const messageType = Object.keys(m.message)[0];
 								})
 								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
+								fs.unlinkSync(ran)*/
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -514,12 +438,11 @@ const messageType = Object.keys(m.message)[0];
 						ranw = getRandom('.webp')
 						ranp = getRandom('.png')
 						reply(mess.wait)
-						keyrmbg = 'Your-ApiKey'
-						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg, size: 'auto', type: 'auto', ranp}).then(res => {
+						await removeBackgroundFromImageFile({path: media, size: 'auto', type: 'auto', ranp}).then(res => {
 							fs.unlinkSync(media)
 							let buffer = Buffer.from(res.base64img, 'base64')
 							fs.writeFileSync(ranp, buffer, (err) => {
-								if (err) return reply('❌ Falló, se produjo un error, inténtelo de nuevo más tarde. ❌')
+								if (err) return reply('Gagal, Terjadi kesalahan, silahkan coba beberapa saat lagi.')
 							})
 							exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
 								fs.unlinkSync(ranp)
@@ -532,7 +455,7 @@ const messageType = Object.keys(m.message)[0];
 								//client.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
 							})
 						})
-					} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
+					/*} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
@@ -552,11 +475,13 @@ const messageType = Object.keys(m.message)[0];
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=${args[0]}@0.0, split [a][b]; [a] palettegen=reserve_transparent=off; [b][p] paletteuse`])
 							.toFormat('webp')
-							.save(ran)
+							.save(ran)*/
 					} else {
-						reply(`Envía fotos con subtítulos ${prefix}pegatinas o etiquetas de imagen que se han enviado`)
+						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 					}
-					break*/
+					break
+					
+					
 				case 'tts':
 					if (args.length < 1) return client.sendMessage(from, '¿Dónde está el código de idioma?', text, {quoted: mek})
 					const gtts = require('./lib/tts')(args[0])
