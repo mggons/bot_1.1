@@ -472,7 +472,7 @@ const messageType = Object.keys(m.message)[0];
 								})
 								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)*/
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -503,7 +503,7 @@ const messageType = Object.keys(m.message)[0];
 								})
 								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)*/
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -532,7 +532,7 @@ const messageType = Object.keys(m.message)[0];
 								//client.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
 							})
 						})
-					/*} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
+					} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
@@ -552,7 +552,7 @@ const messageType = Object.keys(m.message)[0];
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=${args[0]}@0.0, split [a][b]; [a] palettegen=reserve_transparent=off; [b][p] paletteuse`])
 							.toFormat('webp')
-							.save(ran)*/
+							.save(ran)
 					} else {
 						reply(`Envía fotos con subtítulos ${prefix}pegatinas o etiquetas de imagen que se han enviado`)
 					}
@@ -634,7 +634,7 @@ const messageType = Object.keys(m.message)[0];
 					break 
 					
 	
-				case 'ytsearch':
+				/*case 'ytsearch':
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'})
@@ -645,7 +645,7 @@ const messageType = Object.keys(m.message)[0];
 					}
 					reply(teks.trim())
 					await limitAdd(sender) 
-					break 
+					break */
 					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
