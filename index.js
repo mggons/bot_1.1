@@ -371,16 +371,12 @@ async function starts() {
 					}
 					break
 				case 'stiker': 
-			case 'sticker':
-			case 's':
-                 if (!isRegistered) return reply( ind.noregis())
-				if (isLimit(sender)) return reply(ind.limitend(pusname))
-				if (isBanned) return reply('Maaf kamu sudah terbenned!')
-				reply('*Loading.. Sedang membuat sticker*')
-					await limitAdd(sender)
+				case 'sticker':
+				case 's':
+					
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await manik.downloadAndSaveMediaMessage(encmedia)
+						const media = await downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
 						await ffmpeg(`./${media}`)
 							.input(media)
@@ -395,7 +391,7 @@ async function starts() {
 							.on('end', function () {
 								console.log('Finish')
 								buffer = fs.readFileSync(ran)
-								manik.sendMessage(from, buffer, sticker, {quoted: mek})
+								sendMessage(from, buffer, sticker, {quoted: mek})
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
@@ -404,7 +400,7 @@ async function starts() {
 							.save(ran)
 					} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await manik.downloadAndSaveMediaMessage(encmedia)
+						const media = await downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
 						reply(ind.wait())
 						await ffmpeg(`./${media}`)
@@ -421,7 +417,7 @@ async function starts() {
 							.on('end', function () {
 								console.log('Finish')
 								buffer = fs.readFileSync(ran)
-								manik.sendMessage(from, buffer, sticker, {quoted: freply})
+								sendMessage(from, buffer, sticker, {quoted: freply})
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
