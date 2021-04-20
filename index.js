@@ -25,6 +25,12 @@ const result = JSON.parse(fs.readFileSync('./src/result.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
+const imageminWebp = require("imagemin-webp");
+const { tmpdir } = require("os");
+const path = require("path");
+const streamifier = require("streamifier");
+const Axios = require("axios");
+const Crypto = require("crypto");
 //Añadida entrada de OWNER //
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
@@ -557,8 +563,8 @@ async function starts() {
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(10)}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
-					for (let i of anu.result [result]){
-						teks += `\`\`\`Título\`\`\` : *${i.title}*\n\`\`\`Link\`\`\` : *https://youtu.be/${i.id}*\n\`\`\`Publicados\`\`\` : *${i.uploadDate}*\n\`\`\`Duração\`\`\` : *${i.duration}*\n\`\`\`Visualizadores: \`\`\`*${h2k(i.viewCount)}*\n\`\`\`Canal:\`\`\` *${i.channel.name}*\n=================\n`
+					for (let i of anu.result [result : ${i.result}]){
+						teks += `\`\`\`Título\`\`\` : *${i.title}*\n\`\`\`Link\`\`\` : *https://youtu.be/${i.id}*\n\`\`\`Publicados\`\`\` : *${i.uploadDate}*\n\`\`\`Duracion\`\`\` : *${i.duration}*\n\`\`\`Visualizadores: \`\`\`*${h2k(i.viewCount)}*\n\`\`\`Canal:\`\`\` *${i.channel.name}*\n=================\n`
 					}
 					reply(teks.trim())
 					await limitAdd(sender) 
@@ -568,7 +574,7 @@ async function starts() {
 					if (args.length < 1) return reply('¿Dónde está la URL?')
 					if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.error.Iv)
 					reply(mess.wait)
-					anu = await fetchJson(`https://mhankbarbar.moe/api/tiktok?url=${args[0]}&apiKey=${apiKey}`, {method: 'get'})
+					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/tiktok_nowm?url=${args[0]}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, video, {quoted: mek})
