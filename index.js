@@ -446,7 +446,7 @@ const messageType = Object.keys(m.message)[0];
 						reply('Hay un error')
 					}
 					break
-				case 'stiker':
+				/*case 'stiker':
 				case 'sticker':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -556,7 +556,7 @@ const messageType = Object.keys(m.message)[0];
 					} else {
 						reply(`Envía fotos con subtítulos ${prefix}pegatinas o etiquetas de imagen que se han enviado`)
 					}
-					break
+					break*/
 				case 'tts':
 					if (args.length < 1) return client.sendMessage(from, '¿Dónde está el código de idioma?', text, {quoted: mek})
 					const gtts = require('./lib/tts')(args[0])
