@@ -265,6 +265,31 @@ async function starts() {
 
 			}
 
+			function isLimit(id){
+                   			 if (isSadmin) {return false;}
+                   			 let found = false;
+                    			 for (let i of limit){
+                       			 if(i.id === id){
+                            		 let limits = i.limit;
+                             		 if (limits >= limitCount) {
+                                	 found = true;
+                                	 reply('Tu comando BOT ha llegado al límite, inténtalo mañana :)')
+                                	return true;
+                            		}else{
+                                	limit
+                                	found = true;
+                                	return false;
+                            		     }
+                        		   }
+                    			}
+                    			if (found === false){
+                        		let obj = {id: `${id}`, limit:1};
+                        		limit.push(obj);
+                        		fs.writeFileSync('./src/limit.json',JSON.stringify(limit));
+                        		return false;
+                    			   }  
+                			}
+			
 			switch(command) {
 				
 				case 'help':
