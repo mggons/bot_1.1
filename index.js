@@ -31,7 +31,7 @@ const path = require("path");
 const streamifier = require("streamifier");
 const Axios = require("axios");
 const Crypto = require("crypto");
-let limit = JSON.parse(fs.readFileSync('./settings/limit.json'));
+let limit = JSON.parse(fs.readFileSync('./src/limit.json'));
 //Añadida entrada de OWNER //
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
