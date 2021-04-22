@@ -612,7 +612,6 @@ async function starts() {
 					if (anu.error) return reply(anu.error)
 					teks = `*Filename* : ${anu.filename}\n*url* : ${anu.url}\n*Size* : ${anu.filesize}\n*uploaded* : ${anu.uploaded}\n*filetype* : ${anu.filetype}\n*desc* : ${anu.desc}`
 					client.sendMessage(from, filename, url, filetype, desc, {quoted: mek, caption: teks})
-					await limitAdd(sender)
 					break
 					
 				/*ase 'tstiker':
