@@ -115,7 +115,8 @@ async function starts() {
 				} catch {
 					ppimg = 'https://i.pinimg.com/236x/e8/b0/d2/e8b0d26658598ea5a192b8d777d7e691.jpg'
 				}
-				teks = `Hola @${num.split('@')[0]}\n Te damos la bienvenida a *${mdata.subject}* \n espero que el grupo sea de tu agrado. ^.^, \nPara descargar audio usa *#mp3 + 'Link de video'* \nPara descargar Video usa *#mp4 + 'Link de video'*\n recuerda los videos deben ser de Youtube`
+				teks = `Hola @*${num.split('@')[0]}*\nTe damos la bienvenida a *${mdata.subject}* \nespero que el grupo sea de tu agrado.☺, \nPara descargar audio usa *#mp3 (espacio) y luego 'Link de video'* \nPara descargar Video usa *#mp4 (espacio) y luego 'Link de video'*
+				\nRecuerda los videos deben ser de Youtube preferible de tipo lyrics,\nPara buscar una cancion o artista usa *#ytsearch`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
@@ -485,7 +486,7 @@ async function starts() {
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Title* : ${anu.title}\n*Size 128Kbps* : ${anu.filesize}\n*result* : ${anu.result}`
+					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.filesize}\n** : ${anu.result}`
 					thumb = await getBuffer(anu.thumb)
 					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result)
