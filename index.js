@@ -154,7 +154,8 @@ async function starts() {
 			const content = JSON.stringify(mek.message)
 			const from = mek.key.remoteJid
 			const type = Object.keys(mek.message)[0]
-			const apiKey = setting.apiKey // contact me on whatsapp wa.me/6285892766102
+			const apiKey = setting.apiKey
+			const apiKey2 = setting.apiKey2// contact me on whatsapp wa.me/6285892766102
 			const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 			const time = moment.tz('America/Bogota').format('DD/MM HH:mm:ss') //cambio de Zona horaria
 			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
@@ -371,13 +372,11 @@ async function starts() {
 						reply('Hay un error')
 					}
 					break
-				case 'stiker': 
+				case 'stiker':
 				case 'sticker':
-				case 's':
-					
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await downloadAndSaveMediaMessage(encmedia)
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
 						await ffmpeg(`./${media}`)
 							.input(media)
@@ -387,23 +386,22 @@ async function starts() {
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
-								reply(ind.stikga())
+								reply(mess.error.stick)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								sendMessage(from, buffer, sticker, {quoted: mek})
+								client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
-					} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+						} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await downloadAndSaveMediaMessage(encmedia)
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
-						reply(ind.wait())
+						reply(mess.wait)
 						await ffmpeg(`./${media}`)
 							.inputFormat(media.split('.')[1])
 							.on('start', function (cmd) {
@@ -413,22 +411,20 @@ async function starts() {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(ind.stikga())
+								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								sendMessage(from, buffer, sticker, {quoted: freply})
+								buff = fs.readFileSync(ran)
+								client.sendMessage(from, buff, sticker)
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
-							} else {
-							reply(`Kirim gambar dengan caption ${prefix}sticker atau reply/tag gambar`)
-							}
-			    			break					
+						}
+						break	
 				case 'tts':
 					if (args.length < 1) return client.sendMessage(from, '¿Dónde está el código de idioma?', text, {quoted: mek})
 					const gtts = require('./lib/tts')(args[0])
@@ -447,6 +443,11 @@ async function starts() {
 					buffer = await getBuffer(`https://imgur.com/${meme.hash}.jpg`)
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: '.......'})
 					break
+				case 'nekonime':
+           				data = await fetchJson('https://waifu.pics/api/sfw/neko')
+           				hasil = await getBuffer(data.url)
+           				client.sendMessage(from, hasil, image, {quoted: mek})
+           				break
 				/*case 'memeindo':
 					memein = await kagApi.memeindo()
 					buffer = await getBuffer(`https://imgur.com/${memein.hash}.jpg`)
@@ -467,6 +468,19 @@ async function starts() {
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: '¡Mira! Otra Loli'})
 					})
 					break
+					
+				case 'google':
+                        		if(isLimit(serial)) return
+                        		var googleQuery = body.slice(8)
+                        		if(googleQuery == undefined || googleQuery == ' ') return
+                        		google({ 'query': googleQuery, 'limit': '2' }).then(results => {
+                            		let vars = results[0];
+                            		client.sendText(from, `_*Hasil Pencarian Google*_\n\n~> Judul : \n${vars.title}\n\n~> Deskripsi : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Processing Sukses #XyZ BOT*_`);
+                        		}).catch(e => {
+                            		client.sendText(e);
+                        		})
+                        		limitAdd(serial)
+                        		break
 				/*case 'nsfwloli':
 					if (!isNsfw) return reply('❌ *FALSE* ❌')
 					loli.getNSFWLoli(async (err, res) => {
@@ -484,12 +498,12 @@ async function starts() {
 				 case 'mp3':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp3?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
+					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytmp3/?url=${args[0]}&apiKey2=${apiKey2}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.filesize}\n** : ${anu.result}`
-					thumb = await getBuffer(anu.thumb)
+					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.filesize}\n*formato* : ${anu.format}\n*Descarga* : ${anu.link}\n** : ${anu.thumbnail}`
+					thumb = await getBuffer(anu.thumbnail)
 					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
-					buffer = await getBuffer(anu.result)
+					buffer = await getBuffer(anu.link)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
 					
