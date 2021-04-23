@@ -496,16 +496,7 @@ async function starts() {
 					})
 					break
 					
-				case 'google': //añadido by JDMTECH
-                        		var googleQuery = body.slice(8)
-                        		if(googleQuery == undefined || googleQuery == ' ') return
-                        		google({ 'query': googleQuery, 'limit': '100' }).then(results => {
-                            		let vars = results[0];
-                            		client.sendText(from, `_*Hasil Pencarian Google*_\n\n~> Judul : \n${vars.title}\n\n~> Deskripsi : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Processing Sukses #XyZ BOT*_`);
-                        		}).catch(e => {
-                            		client.sendText(e);
-                        		})
-                        		break
+				
 				/*case 'nsfwloli':
 					if (!isNsfw) return reply('❌ *FALSE* ❌')
 					loli.getNSFWLoli(async (err, res) => {
@@ -555,7 +546,19 @@ async function starts() {
 						teks += `*titulo* : *${i.title}*\n *link* : *https://youtu.be/${i.id}*\n*Publicado* : *${i.uploadDate}*\n*Duracion* : *${i.duration}*\n*Vistas* : *${h2k(i.viewCount)}*\n=================\n`
 					}
 					reply(teks.trim())
-					break 
+					break
+					
+				case 'google': //añadido by JDMTECH
+					reply(mess.wait)
+                        		var googleQuery = body.slice(8)
+                        		if(googleQuery == undefined || googleQuery == ' ') return
+                        		google({ 'query': googleQuery, 'limit': '5' }).then(results => {
+                            		let vars = results[0];
+                            		client.sendText(from, `_*Resultado de búsqueda Google*_\n\n~> Título : \n${vars.title}\n\n~> Descripción : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Busqueda Finalizada*_`);
+                        		}).catch(e => {
+                            		client.sendText(e);
+                        		})
+                        		break
 					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
