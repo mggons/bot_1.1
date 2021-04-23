@@ -265,7 +265,7 @@ async function starts() {
 
 			}
 
-			function isLimit(id){
+			/*function isLimit(id){
                    			 if (isSadmin) {return false;}
                    			 let found = false;
                     			 for (let i of limit){
@@ -288,7 +288,7 @@ async function starts() {
                         		fs.writeFileSync('./src/limit.json',JSON.stringify(limit));
                         		return false;
                     			   }  
-                			}
+                			}*/
 			
 			switch(command) {
 				
@@ -496,7 +496,6 @@ async function starts() {
 					break
 					
 				case 'google':
-                        		if(isLimit(serial)) return
                         		var googleQuery = body.slice(8)
                         		if(googleQuery == undefined || googleQuery == ' ') return
                         		google({ 'query': googleQuery, 'limit': '2' }).then(results => {
@@ -505,7 +504,6 @@ async function starts() {
                         		}).catch(e => {
                             		client.sendText(e);
                         		})
-                        		limitAdd(serial)
                         		break
 				/*case 'nsfwloli':
 					if (!isNsfw) return reply('❌ *FALSE* ❌')
@@ -605,14 +603,14 @@ async function starts() {
 					break
 					
 					
-				case 'mediafire':  //modificaciones de JDMTECH
+				/*case 'mediafire':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de mediafire?')
 					if(!isUrl(args[0]) && !args[0].includes('mediafire')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Filename* : ${anu.filename}\n*url* : ${anu.url}\n*Size* : ${anu.filesize}\n*uploaded* : ${anu.uploaded}\n*filetype* : ${anu.filetype}\n*desc* : ${anu.desc}`
 					client.sendMessage(from, filename, url, filetype, desc, {quoted: mek, caption: teks})
-					break
+					break/
 					
 				/*ase 'tstiker':
 				case 'tsticker':
