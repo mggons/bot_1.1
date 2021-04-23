@@ -32,6 +32,7 @@ const streamifier = require("streamifier");
 const Axios = require("axios");
 const Crypto = require("crypto");
 let limit = JSON.parse(fs.readFileSync('./src/limit.json'));
+const google = require('google-it');
 //Añadida entrada de OWNER //
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
@@ -495,10 +496,10 @@ async function starts() {
 					})
 					break
 					
-				case 'google':
+				case 'google': //añadido by JDMTECH
                         		var googleQuery = body.slice(8)
                         		if(googleQuery == undefined || googleQuery == ' ') return
-                        		google({ 'query': googleQuery, 'limit': '2' }).then(results => {
+                        		google({ 'query': googleQuery, 'limit': '100' }).then(results => {
                             		let vars = results[0];
                             		client.sendText(from, `_*Hasil Pencarian Google*_\n\n~> Judul : \n${vars.title}\n\n~> Deskripsi : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Processing Sukses #XyZ BOT*_`);
                         		}).catch(e => {
