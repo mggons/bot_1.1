@@ -549,19 +549,19 @@ async function starts() {
 					reply(teks.trim())
 					break
 					
-				/*case 'google': //añadido by JDMTECH
+				case 'google': //añadido by JDMTECH
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
                         		var googleQuery = body.slice(8)
                         		if(googleQuery == undefined || googleQuery == ' ') return
-                        		google({ 'query': googleQuery, 'limit': '5' }).then(results => {
+                        		google({ 'query': googleQuery, 'limit': '5' '-o' results.json '-n'}).then(results => {
                             		let vars = results[0];
 						 `_*Resultado de búsqueda Google*_\n\n~> Título : \n${vars.title}\n\n~> Descripción : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Busqueda Finalizada*_`
 					}
 					client.sendMessage(from, {caption : teks})
 					}
                         		break
-					*/
+					
 					
 				case 'apkpure':
 					if (args.length < 1) return reply('¿Qué estás buscando?')
@@ -691,7 +691,7 @@ async function starts() {
 					}
 					reply('eliminar todo el chat completado :) ')
 					break
-				case 'bc':
+				case 'broadcast':
 					if (!isOwner) return reply('¿Quién es usted?')
 					if (args.length < 1) return reply('.......')
 					anu = await client.chats.all()
@@ -699,12 +699,12 @@ async function starts() {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						buff = await client.downloadMediaMessage(encmedia)
 						for (let _ of anu) {
-							client.sendMessage(_.jid, buff, image, {caption: `[ Ini Broadcast ]\n\n${body.slice(4)}`})
+							client.sendMessage(_.jid, buff, image, {caption: `*[ Iniciando Broadcast ]*\n\n${body.slice(4)}`})
 						}
 						reply('Transmisión de éxito')
 					} else {
 						for (let _ of anu) {
-							sendMess(_.jid, `[ Ini Broadcast ]\n\n${body.slice(4)}`)
+							sendMess(_.jid, `*[ Iniciando Broadcast ]*\n\n${body.slice(4)}`)
 						}
 						reply('Transmisión de éxito')
 					}
