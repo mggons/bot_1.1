@@ -563,7 +563,9 @@ async function starts() {
                         		break
 					*/
 					
-				case 'apkpure'://UPDATE MR.108P
+				case 'apkpure':
+					if (args.length < 1) return reply('¿Qué estás buscando?')
+					reply(mess.wait)
 					data = await fetchJson(`https://api.zeks.xyz/api/apkpure?q=${body.slice(4)}&apikey=apivinz`, {method: 'get'})
 					teks = '=================\n'
 					for (let i of data.result) {
@@ -618,14 +620,15 @@ async function starts() {
 					break
 					
 					
-				/*case 'mediafire':  //modificaciones de JDMTECH
+				case 'mediafire':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de mediafire?')
 					if(!isUrl(args[0]) && !args[0].includes('mediafire')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
+					anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=apivinz&url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Filename* : ${anu.filename}\n*url* : ${anu.url}\n*Size* : ${anu.filesize}\n*uploaded* : ${anu.uploaded}\n*filetype* : ${anu.filetype}\n*desc* : ${anu.desc}`
-					client.sendMessage(from, filename, url, filetype, desc, {quoted: mek, caption: teks})
-					break/
+					teks = `*Filename* : ${anu.name_file}\n*url* : ${anu.download}\n*Size* : ${anu.file_size}
+					\n*uploaded* : ${anu.upload_date}\n*filetype* : ${anu.file_type}\n*Descripcion* : ${anu.description}`
+					client.sendMessage(from, name_file, file_type, upload_date, description, download, {quoted: mek, caption: teks})
+					break
 					
 				/*case 'tstiker':
 				case 'tsticker':
@@ -893,7 +896,7 @@ async function starts() {
 					}
 					break
 				
-				case 'closegroup':
+				case 'closegroup': //Añadido by JDMTECH
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -906,7 +909,7 @@ async function starts() {
 					client.groupSettingChange (from, GroupSettingChange.messageSend, true);
 					reply(close)
 					break
-                		case 'opengroup':
+                		case 'opengroup': //Añadido by JDMTECH
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
