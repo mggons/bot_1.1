@@ -512,10 +512,10 @@ async function starts() {
 					reply(anu.result)
 					break*/
 					
-				 /*case 'mp3':  //modificaciones de JDMTECH
+				 case 'mp3':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytmp3/?url=${args[0]}&apiKey2=${apiKey2}`, {method: 'get'})  //modificaciones de JDMTECH
+					anu = await fetchJson(`https://videfikri.com/api/ytmp3/?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.filesize}\n*formato* : ${anu.format}\n*Descarga* : ${anu.link}\n** : ${anu.thumbnail}`
 					thumb = await getBuffer(anu.thumbnail)
@@ -523,11 +523,11 @@ async function starts() {
 					buffer = await getBuffer(anu.link)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
-					*/
-				  /*case 'mp4':  //modificaciones de JDMTECH
+					
+				  case 'mp4':  //modificaciones de JDMTECH
 					if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
-					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'}) //modificaciones de JDMTECH
+					anu = await fetchJson(`https://videfikri.com/api/ytmp4/?url=${args[0]}`, {method: 'get'}) //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
 					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}\n*result* : ${anu.result}`
 					thumb = await getBuffer(anu.thumb)
@@ -535,7 +535,7 @@ async function starts() {
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
 					break 
-					*/
+					
 	
 				case 'ytsearch': //Modifcado 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
@@ -617,7 +617,7 @@ async function starts() {
 					client.sendMessage(from, filename, url, filetype, desc, {quoted: mek, caption: teks})
 					break/
 					
-				/*ase 'tstiker':
+				/*case 'tstiker':
 				case 'tsticker':
 					if (args.length < 1) return reply('¿Dónde está el texto, eh?')
 					ranp = getRandom('.png')
