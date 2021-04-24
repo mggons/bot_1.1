@@ -691,7 +691,7 @@ async function starts() {
 					}
 					reply('eliminar todo el chat completado :) ')
 					break
-				case 'broadcast':
+				case 'gb': //mensaje global, solo permitido a los administradores 
 					if (!isOwner) return reply('¿Quién es usted?')
 					if (args.length < 1) return reply('.......')
 					anu = await client.chats.all()
@@ -701,12 +701,12 @@ async function starts() {
 						for (let _ of anu) {
 							client.sendMessage(_.jid, buff, image, {caption: `*[ Iniciando Broadcast ]*\n\n${body.slice(4)}`})
 						}
-						reply('Transmisión de éxito')
+						reply('*Transmisión Completada*')
 					} else {
 						for (let _ of anu) {
 							sendMess(_.jid, `*[ Iniciando Broadcast ]*\n\n${body.slice(4)}`)
 						}
-						reply('Transmisión de éxito')
+						reply('*Transmisión Completada*')
 					}
 					break
                                 case 'promote':
