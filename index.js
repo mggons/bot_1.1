@@ -512,7 +512,7 @@ async function starts() {
 					reply(anu.result)
 					break*/
 					
-				 case 'mp3':  //modificaciones de JDMTECH
+				 /*case 'mp3':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytmp3/?url=${args[0]}&apiKey2=${apiKey2}`, {method: 'get'})  //modificaciones de JDMTECH
@@ -523,8 +523,8 @@ async function starts() {
 					buffer = await getBuffer(anu.link)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
-					
-				  case 'mp4':  //modificaciones de JDMTECH
+					*/
+				  /*case 'mp4':  //modificaciones de JDMTECH
 					if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
 					anu = await fetchJson(`https://docs-jojo.herokuapp.com/api/ytmp4?url=${args[0]}`, {method: 'get'}) //modificaciones de JDMTECH
@@ -535,7 +535,7 @@ async function starts() {
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
 					break 
-					
+					*/
 	
 				case 'ytsearch': //Modifcado 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
@@ -549,7 +549,7 @@ async function starts() {
 					reply(teks.trim())
 					break
 					
-				case 'google': //añadido by JDMTECH
+				/*case 'google': //añadido by JDMTECH
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
                         		var googleQuery = body.slice(8)
@@ -561,7 +561,7 @@ async function starts() {
 					client.sendMessage(from, {caption : teks})
 					}
                         		break
-					
+					*/
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
 					if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.error.Iv)
