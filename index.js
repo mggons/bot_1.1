@@ -33,6 +33,7 @@ const Axios = require("axios");
 const Crypto = require("crypto");
 let limit = JSON.parse(fs.readFileSync('./src/limit.json'));
 const google = require('google-it');
+const results = JSON.parse(fs.readFileSync('./src/results.json'))
 //Añadida entrada de OWNER //
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:3.0\n' 
@@ -539,7 +540,7 @@ async function starts() {
 				case 'ytsearch': //Modifcado 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
-					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytsearch/?q=${body.slice(10)}&apikey=XinzBot`, {method: 'get'})
+					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytsearch/?q=${body.slice(5)}&apikey=XinzBot`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result){
@@ -549,15 +550,16 @@ async function starts() {
 					break
 					
 				case 'google': //añadido by JDMTECH
+					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
                         		var googleQuery = body.slice(8)
                         		if(googleQuery == undefined || googleQuery == ' ') return
                         		google({ 'query': googleQuery, 'limit': '5' }).then(results => {
                             		let vars = results[0];
-                            		client.sendText(from, `_*Resultado de búsqueda Google*_\n\n~> Título : \n${vars.title}\n\n~> Descripción : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Busqueda Finalizada*_`);
-                        		}).catch(e => {
-                            		client.sendText(e);
-                        		})
+						 `_*Resultado de búsqueda Google*_\n\n~> Título : \n${vars.title}\n\n~> Descripción : \n${vars.snippet}\n\n~> Link : \n${vars.link}\n\n_*Busqueda Finalizada*_`
+					}
+					client.sendMessage(from, {caption : teks})
+					}
                         		break
 					
 				case 'tiktok':
@@ -880,6 +882,39 @@ async function starts() {
 						reply('Om fallido')
 					}
 					break
+				
+				case 'closegroup':
+					client.updatePresence(from, Presence.composing) 
+					if (!isGroup) return reply(mess.only.group)
+					if (!isGroupAdmins) return reply(mess.only.admin)
+					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+					var nomor = mek.participant
+					const close = {
+					text: `Grupo cerrado por administrador @${nomor.split("@s.whatsapp.net")[0]}\nahora *Solo el administrador* puede enviar mensajes`,
+					contextInfo: { mentionedJid: [nomor] }
+					}
+					client.groupSettingChange (from, GroupSettingChange.messageSend, true);
+					reply(close)
+					break
+                		case 'opentext':
+					client.updatePresence(from, Presence.composing) 
+					if (!isGroup) return reply(mess.only.group)
+					if (!isGroupAdmins) return reply(mess.only.admin)
+					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+					open = {
+					text: `Grupo abierto por el administrador @${sender.split("@")[0]}\nahora *todos los participantes* pueden enviar mensajes`,
+					contextInfo: { mentionedJid: [sender] }
+					}
+					client.groupSettingChange (from, GroupSettingChange.messageSend, false)
+					client.sendMessage(from, open, text, {quoted: mek})
+					break
+			
+			
+			
+			
+			
+			
+			
 				case 'wait':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						reply(mess.wait)
