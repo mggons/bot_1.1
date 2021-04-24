@@ -517,10 +517,10 @@ async function starts() {
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://videfikri.com/api/ytmp3/?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.filesize}\n*formato* : ${anu.format}\n*Descarga* : ${anu.link}\n** : ${anu.thumbnail}`
+					teks = `*Titulo* : ${anu.title}\n*Peso* : ${anu.size}\n*formato* : ${anu.format}\n*Descarga* : ${anu.url_audio}\n*result* : ${anu.result}`
 					thumb = await getBuffer(anu.thumbnail)
-					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
-					buffer = await getBuffer(anu.link)
+					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
 					
@@ -529,10 +529,10 @@ async function starts() {
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
 					anu = await fetchJson(`https://videfikri.com/api/ytmp4/?url=${args[0]}`, {method: 'get'}) //modificaciones de JDMTECH
 					if (anu.error) return reply(anu.error)
-					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}\n*result* : ${anu.result}`
-					thumb = await getBuffer(anu.thumb)
-					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
-					buffer = await getBuffer(anu.result)
+					teks = `*Title* : ${anu.title}\n*Size* : ${anu.filesize}\n*result* : ${anu.url_video}\n** : ${anu.thumbnail}`
+					thumb = await getBuffer(anu.thumbnail)
+					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.url_video)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
 					break 
 					
@@ -906,7 +906,7 @@ async function starts() {
 					client.groupSettingChange (from, GroupSettingChange.messageSend, true);
 					reply(close)
 					break
-                		case 'opentext':
+                		case 'opengroup':
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
