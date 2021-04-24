@@ -562,6 +562,16 @@ async function starts() {
 					}
                         		break
 					*/
+					
+				case 'apkpure'://UPDATE MR.108P
+					data = await fetchJson(`https://api.zeks.xyz/api/apkpure?q=${body.slice(4)}&apikey=apivinz`, {method: 'get'})
+					teks = '=================\n'
+					for (let i of data.result) {
+					teks += `*Nombre APK* : ${i.title}\n*Link* : ${i.url}\n*Rating* : ${i.rating}\n=================\n`
+					}
+					reply(teks.trim())
+					break
+					
 				case 'tiktok':
 					if (args.length < 1) return reply('¿Dónde está la URL?')
 					if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.error.Iv)
