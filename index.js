@@ -543,11 +543,11 @@ async function starts() {
 					teks = `Titulo : ${anu.result.title}
 					Size : ${anu.result.size}
 					*Espere un momento para ser enviado*
-					Este es el enlace de audio a través del enlace sistema:
+					Este es el enlace de audio a través del enlace:
 					${anu.result.url_audio}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_audio)
-					client.sendMessage(from, buffer, audio, {quoted: mek})
+					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
 					break
 				case 'mp4': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('Y el url de youtube?')
@@ -556,7 +556,7 @@ async function starts() {
 					teks = `Titulo : ${anu.result.title}
 					Size : ${anu.result.size}
 					*Espere un momento para ser enviado*
-					Este es el enlace de audio a través del enlace sis:
+					Este es el enlace de audio a través del enlace:
 					${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
