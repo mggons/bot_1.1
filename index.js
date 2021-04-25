@@ -512,7 +512,7 @@ async function starts() {
 					reply(anu.result)
 					break*/
 					
-				 case 'mp3':  //modificaciones de JDMTECH
+				 /*case 'mp3':  //modificaciones de JDMTECH
                     			if (args.length < 1) return reply('Y el url de youtube?')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 					anu = await fetchJson(`https://videfikri.com/api/ytmp3/?url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
@@ -534,8 +534,34 @@ async function starts() {
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.url_video)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
-					break 
+					break*/ 
 					
+				case 'mp3': //Añadido by JDMTECH
+					if (args.length < 1) return reply('Y el url de youtube?')
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3?url=${args[0]}&apikey=apivinz`, {method: 'get'})
+					thumbnail = await getBuffer(anu.result.thumbnail)
+					teks = `Titulo : ${anu.result.title}
+					Size : ${anu.result.size}
+					*Espere un momento para ser enviado*
+					Este es el enlace de audio a través del enlace sistema:
+					${anu.result.url_audio}`
+					baby.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.result.url_audio)
+					baby.sendMessage(from, buffer, audio, {quoted: mek})
+					break
+				case 'mp4': //Añadido by JDMTECH 
+					if (args.length < 1) return reply('Y el url de youtube?')
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${args[0]}&apikey=apivinz`, {method: 'get'})
+					thumbnail = await getBuffer(anu.result.thumbnail)
+					teks = `Titulo : ${anu.result.title}
+					Size : ${anu.result.size}
+					*Espere un momento para ser enviado*
+					Este es el enlace de audio a través del enlace sis:
+					${anu.result.url_video}`
+					baby.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.result.url_video)
+					baby.sendMessage(from, buffer, video, {quoted: mek, caption: 'Nih :)'})
+					break
 	
 				case 'ytsearch': //Modifcado 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
