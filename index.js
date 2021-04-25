@@ -545,9 +545,9 @@ async function starts() {
 					*Espere un momento para ser enviado*
 					Este es el enlace de audio a través del enlace sistema:
 					${anu.result.url_audio}`
-					baby.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_audio)
-					baby.sendMessage(from, buffer, audio, {quoted: mek})
+					client.sendMessage(from, buffer, audio, {quoted: mek})
 					break
 				case 'mp4': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('Y el url de youtube?')
@@ -558,9 +558,9 @@ async function starts() {
 					*Espere un momento para ser enviado*
 					Este es el enlace de audio a través del enlace sis:
 					${anu.result.url_video}`
-					baby.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
+					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
-					baby.sendMessage(from, buffer, video, {quoted: mek, caption: 'Nih :)'})
+					client.sendMessage(from, buffer, video, {quoted: mek, caption: 'Nih :)'})
 					break
 	
 				case 'ytsearch': //Modifcado 
