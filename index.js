@@ -302,8 +302,10 @@ async function starts() {
 				case 'owner':
          	   		case 'admincreator':
                   			client.sendMessage(from, {displayname: "JDMTECH", vcard: vcard}, MessageType.contact, { quoted: mek})
-                  			client.sendMessage(from, '*El número de mi dueño >_<, no spam o te bloqueo*',MessageType.text, { quoted: mek} )
-					break    
+                  			client.sendMessage(from, '_*Este es mi propietario. No olvides cualquier inquietud con el admin ...*_',MessageType.text, { quoted: mek} )
+					tod = await getBuffer(`https://i.ibb.co/Vm5FHxc/IMG-20210312-WA1759.jpg`)
+ 					client.sendMessage(from, tod, image, { quoted: mek, caption: '_*Tomate tu tiempo y donanos a nuestro paypal, te lo agradeceremos con gusto ->  https://www.paypal.me/malagons !!*_'})
+                     			break
 					
 				case 'ping':
                        			const timestamp = speed();
@@ -547,7 +549,7 @@ async function starts() {
 					${anu.result.url_audio}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_audio)
-					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
+					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: mek})
 					break
 				case 'mp4': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('Y el url de youtube?')
@@ -560,17 +562,19 @@ async function starts() {
 					${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
-					client.sendMessage(from, buffer, video, {quoted: mek, caption: 'Nih :)'})
+ 					client.sendMessage(from, buffer, video, {mimetype: 'audio/mp4', quoted: mek, caption: 'Listo para disfrutar :)'})
 					break
 	
-				case 'ytsearch': //Modifcado 
+				case 'ytsearch': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
-					anu = await fetchJson(`https://xinzbot-api.herokuapp.com/api/ytsearch/?q=${body.slice(5)}&apikey=XinzBot`, {method: 'get'})
+					anu = await fetchJson(`https://api.zeks.xyz/api/yts?q=${body.slice(5)}&apikey=apivinz`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=================\n'
 					for (let i of anu.result){
-						teks += `*titulo* : *${i.title}*\n *link* : *https://youtu.be/${i.id}*\n*Publicado* : *${i.uploadDate}*\n*Duracion* : *${i.duration}*\n*Vistas* : *${h2k(i.viewCount)}*\n=================\n`
+					teks += `*titulo* : *${i.video.title}*\n *link* : *https://youtu.be/${i.video.id}*
+					\n*Publicado* : *${i.video.upload_date}*\n*Duracion* : *${i.video.duration}*
+					\n*\n=================\n`
 					}
 					reply(teks.trim())
 					break
@@ -646,14 +650,19 @@ async function starts() {
 					break
 					
 					
-				case 'mediafire':  //modificaciones de JDMTECH
-                    			if (args.length < 1) return reply('Y el url de mediafire?')
-					if(!isUrl(args[0]) && !args[0].includes('mediafire')) return reply(ind.wrogf())
-					anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=apivinz&url=${args[0]}`, {method: 'get'})  //modificaciones de JDMTECH
-					if (anu.error) return reply(anu.error)
-					teks = `*Filename* : ${anu.name_file}\n*url* : ${anu.download}\n*Size* : ${anu.file_size}
-					\n*uploaded* : ${anu.upload_date}\n*filetype* : ${anu.file_type}\n*Descripcion* : ${anu.description}`
-					client.sendMessage(from, name_file, file_type, upload_date, description, download, {quoted: mek, caption: teks})
+				case 'mediafire': 
+					if (args.length < 1) return reply('¿Qué estás buscando?')
+					reply(mess.wait)
+					anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=apivinz&url=${args[0]}`, {method: 'get'})
+					buffer = await getBuffer(anu.download)
+					teks = `Nombre Archivo : ${anu.name_file}
+					File Size : ${anu.file_size}
+					Fecha de Subida : ${anu.upload_date}
+					Tipo de archivo : ${anu.file_type}
+					Link de Descarga : ${anu.download}
+					Descripcion : ${anu.description}`
+					client.sendMessage(from, teks, text, {quoted: mek})
+					costum(buffer, MessageType.document)
 					break
 					
 				/*case 'tstiker':
@@ -775,8 +784,8 @@ async function starts() {
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-					if (args.length < 1) return reply('¿Quieres agregar un genio?')
-					if (args[0].startsWith('08')) return reply('Utilice el código de país mas')
+					if (args.length < 1) return reply('¿Quieres agregar un numero? añadelo sin espacios y recuerda el indicativo pais sin el simbolo +?')
+					if (args[0].startsWith('00')) return reply('Utilice el código de país')
 					try {
 						num = `${args[0].replace(/ /g, '')}@s.whatsapp.net`
 						client.groupAdd(from, [num])
@@ -789,7 +798,7 @@ async function starts() {
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('¡La etiqueta objetivo que quieres patear!')
+					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('¡La etiqueta objetivo que quieres eliminar!')
 					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
 					if (mentioned.length > 1) {
 						teks = 'Órdenes recibidas, emitidas :\n'
@@ -814,7 +823,7 @@ async function starts() {
 					mentions(teks, groupAdmins, true)
 					break
 					
-                		case 'linkgroup': //link de el grupo 
+                		case 'linkgrupo': //link de el grupo 
                     			if (!isGroup) return reply(mess.only.group)
                     			if (!isGroupAdmins) return reply(mess.only.admin)
                     			if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -852,6 +861,7 @@ async function starts() {
 					//if (anu.error) return reply('Simi ga tau kak')
 					reply(anu)
 					break
+			
 				case 'simih':
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -949,8 +959,23 @@ async function starts() {
 					break
 			
 			
-			
-			
+				/*case 'event':              
+					if (!isGroup) return reply(ind.groupo())
+					if (!isOwner) return reply(ind.ownerb())
+					if (args.length < 1) return reply('Umm >_<')
+					if (Number(args[0]) === 1) {
+						if (isEventon) return reply('*CARACTERÍSTICAS DEL EVENTO BOS YA ACTIVO*')
+						event.push(from)
+						fs.writeFileSync('./database/group/event.json', JSON.stringify(event))
+						reply('*「ÉXITO」ACTIVADO EL EVENTO EN EL GRUPO*')
+					} else if (Number(args[0]) === 0) {
+						event.splice(from, 1)
+						fs.writeFileSync('./database/group/event.json', JSON.stringify(event))
+						reply('*「ÉXITO」DESACTIVADO EL EVENTO EN EL GRUPO*')
+					} else {
+						reply(ind.satukos())
+					}
+					break*/
 			
 			
 			
