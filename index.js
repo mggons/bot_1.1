@@ -425,8 +425,8 @@ async function starts() {
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
-.addOutputOptions([`-codec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
+.addOutputOptions([`-codec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`]) 
+							.toFormat('webp') 
 							.save(ran)
 						} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -442,7 +442,7 @@ async function starts() {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+								reply(`❌Falló, en el momento de la conversión ${tipe} a la pegatina❌`)
 							})
 							.on('end', function () {
 								console.log('Finish')
@@ -451,7 +451,7 @@ async function starts() {
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
-.addOutputOptions([`-codec`,`libwebp`,`-v`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.addOutputOptions([`-codec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
 						}
@@ -555,7 +555,7 @@ async function starts() {
 					teks = `Titulo : ${anu.result.title}\nTamaño : ${anu.result.size}\n*Espere un momento para ser enviado*\nEste es el enlace de audio a través del enlace: ${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
- 					client.sendMessage(from, buffer, video, {mimetype: 'audio/mp4', quoted: mek, caption: 'Listo para disfrutar :)'})
+ 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek, caption: 'Listo para disfrutar :)'})
 					break
 	
 				case 'ytbuscar': //Añadido by JDMTECH 
