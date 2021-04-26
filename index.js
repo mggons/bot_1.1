@@ -566,7 +566,7 @@ async function starts() {
  					client.sendMessage(from, buffer, video, {mimetype: 'audio/mp4', quoted: mek, caption: 'Listo para disfrutar :)'})
 					break
 	
-				case 'ytsearch': //Añadido by JDMTECH 
+				case 'ytbuscar': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
 					anu = await fetchJson(`https://api.zeks.xyz/api/yts?q=${body.slice(5)}&apikey=apivinz`, {method: 'get'})
@@ -575,7 +575,7 @@ async function starts() {
 					for (let i of anu.result){
 					teks += `*titulo* : *${i.video.title}*\n *link* : *https://youtu.be/${i.video.id}*
 					\n*Publicado* : *${i.video.upload_date}*\n*Duracion* : *${i.video.duration}*
-					\n*\n=================\n`
+					\n=================\n`
 					}
 					reply(teks.trim())
 					break
