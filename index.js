@@ -425,7 +425,7 @@ async function starts() {
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.addOutputOptions([`-codec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
 						} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
@@ -451,7 +451,7 @@ async function starts() {
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.addOutputOptions([`-codec`,`libwebp`,`-v`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
 						}
@@ -543,11 +543,7 @@ async function starts() {
 					if (args.length < 1) return reply('Y el url de youtube?')
 					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3?url=${args[0]}&apikey=apivinz`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumbnail)
-					teks = `Titulo : ${anu.result.title}
-					Size : ${anu.result.size}
-					*Espere un momento para ser enviado*
-					Este es el enlace de audio a través del enlace:
-					${anu.result.url_audio}`
+					teks = `Titulo : ${anu.result.title}\nTamaño : ${anu.result.size}\n*Espere un momento para ser enviado*\nel enlace de audio a través del\nenlace de descarga: ${anu.result.url_audio}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_audio)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
@@ -556,11 +552,7 @@ async function starts() {
 					if (args.length < 1) return reply('Y el url de youtube?')
 					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${args[0]}&apikey=apivinz`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumbnail)
-					teks = `Titulo : ${anu.result.title}
-					Size : ${anu.result.size}
-					*Espere un momento para ser enviado*
-					Este es el enlace de audio a través del enlace:
-					${anu.result.url_video}`
+					teks = `Titulo : ${anu.result.title}\nTamaño : ${anu.result.size}\n*Espere un momento para ser enviado*\nEste es el enlace de audio a través del enlace: ${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
  					client.sendMessage(from, buffer, video, {mimetype: 'audio/mp4', quoted: mek, caption: 'Listo para disfrutar :)'})
