@@ -154,6 +154,7 @@ async function starts() {
 			if (mek.key.fromMe) return
 			global.prefix
 			global.blocked
+			
 			const content = JSON.stringify(mek.message)
 			const from = mek.key.remoteJid
 			const type = Object.keys(mek.message)[0]
@@ -549,7 +550,7 @@ async function starts() {
 					${anu.result.url_audio}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_audio)
-					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: mek})
+					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
 					break
 				case 'mp4': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('Y el url de youtube?')
@@ -579,7 +580,7 @@ async function starts() {
 					reply(teks.trim())
 					break
 					
-				case 'google': //añadido by JDMTECH
+				/*case 'google': //añadido by JDMTECH
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
                         		var googleQuery = body.slice(8)
@@ -590,7 +591,7 @@ async function starts() {
 					}
 					client.sendMessage(from, {caption : teks})
 					}
-                        		break
+                        		break*/
 					
 					
 				case 'apkpure':
