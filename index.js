@@ -586,7 +586,7 @@ async function starts() {
                         		break*/
 					
 					
-				case 'apkpure':
+				case 'apkpure': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
 					data = await fetchJson(`https://api.zeks.xyz/api/apkpure?q=${body.slice(4)}&apikey=apivinz`, {method: 'get'})
@@ -643,7 +643,7 @@ async function starts() {
 					break
 					
 					
-				case 'mediafire': 
+				case 'mediafire': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('¿Qué estás buscando?')
 					reply(mess.wait)
 					anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=apivinz&url=${args[0]}`, {method: 'get'})
@@ -719,7 +719,7 @@ async function starts() {
 					}
 					reply('eliminar todo el chat completado :) ')
 					break
-				case 'gb': //mensaje global, solo permitido a los administradores 
+				case 'gb': //mensaje global, solo permitido a los administradores  //Añadido by JDMTECH 
 					if (!isOwner) return reply('¿Quién es usted?')
 					if (args.length < 1) return reply('.......')
 					anu = await client.chats.all()
@@ -873,7 +873,7 @@ async function starts() {
 					}
 					break
 									
-				case 'welcomusic':
+				case 'welcomusic': //Añadido by JDMTECH para grupo de musicas 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (args.length < 1) return reply('Hmmmm')
@@ -952,7 +952,7 @@ async function starts() {
 					break
 			
 			
-				/*case 'event':              
+				/*case 'event':     //Añadido by JDMTECH          
 					if (!isGroup) return reply(ind.groupo())
 					if (!isOwner) return reply(ind.ownerb())
 					if (args.length < 1) return reply('Umm >_<')
