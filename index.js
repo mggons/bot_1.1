@@ -656,14 +656,14 @@ async function starts() {
 					reply(mess.wait)
 					anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=apivinz&url=${args[0]}`, {method: 'get'})
 					buffer = await getBuffer(anu.download)
-					teks = `Nombre Archivo : ${anu.name_file}
-					File Size : ${anu.file_size}
-					Fecha de Subida : ${anu.upload_date}
-					Tipo de archivo : ${anu.file_type}
-					Link de Descarga : ${anu.download}
-					Descripcion : ${anu.description}`
+					teks = `*Nombre Archivo* : ${anu.name_file}\n
+					*File Size* : ${anu.file_size}\n
+					*Fecha de Subida* : ${anu.upload_date}\n
+					*Tipo de archivo* : ${anu.file_type}\n
+					*Link de Descarga* : ${anu.download}\n
+					*Descripcion* : ${anu.description}`
 					client.sendMessage(from, teks, text, {quoted: mek})
-					costum(buffer, MessageType.document)
+					client.sendMessage(buffer, MessageType.document)
 					break
 					
 				/*case 'tstiker':
