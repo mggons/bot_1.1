@@ -541,11 +541,11 @@ async function starts() {
 					
 				case 'mp3': //Añadido by JDMTECH
 					if (args.length < 1) return reply('Y el url de youtube?')
-					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3?url=${args[0]}&apikey=apivinz`, {method: 'get'})
-					thumbnail = await getBuffer(anu.result.thumbnail)
-					teks = `Titulo : ${anu.result.title}\nTamaño : ${anu.result.size}\n*Espere un momento para ser enviado*\nel enlace de audio a través del\nenlace de descarga: ${anu.result.url_audio}`
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3/2?url=${args[0]}&apikey=apivinz`, {method: 'get'})
+					thumbnail = await getBuffer(anu.result.thumb)
+					teks = `Titulo : ${anu.result.title}\nTamaño : ${anu.result.size}\nCalidad : ${anu.result.quality}\n*Espere un momento para ser enviado*\nel enlace de audio a través del\nenlace de descarga: ${anu.result.link}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
-					buffer = await getBuffer(anu.result.url_audio)
+					buffer = await getBuffer(anu.result.link)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
 					break
 				case 'mp4': //Añadido by JDMTECH 
