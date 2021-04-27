@@ -22,6 +22,12 @@ const help = (prefix) => {
 ┣⊱ ${prefix}linkgroup -> link del grupo
 ┣⊱ ${prefix}toimg -> Convierte un sticker a imagen
 ┣⊱ ${prefix}stiker -> Convierte imagen a sticker
+┣⊱ ${prefix}
+┣⊱ ${prefix} 
+┣⊱ ${prefix} 
+┣⊱ ${prefix} 
+┣⊱ ${prefix} 
+┣⊱ ${prefix} 
 ┣⊱ ${prefix} 
 ┣⊱ ${prefix} 
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
