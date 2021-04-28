@@ -601,7 +601,7 @@ async function starts() {
 					if (args.length < 1) return reply('Y el url de youtube?')
 					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3/2?url=${args[0]}&apikey=apivinz`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumb)
-					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n*Espere un momento para ser enviado*\n*el enlace de audio a través del\nenlace de descarga*: ${anu.result.link}`
+					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n*Espere un momento para ser enviado*\n*el enlace de audio a través del*\n*enlace de descarga*: ${anu.result.link}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.link)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
@@ -610,7 +610,7 @@ async function starts() {
 					if (args.length < 1) return reply('Y el url de youtube?')
 					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${args[0]}&apikey=apivinz`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumbnail)
-					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n**Espere un momento para ser enviado*\n*el enlace de audio a través del\nenlace de descarga*: ${anu.result.url_video}`
+					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n*Espere un momento para ser enviado*\n*el enlace de audio a través del*\n*enlace de descarga*: ${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
 					buffer = await getBuffer(anu.result.url_video)
  					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek, caption: 'Listo para disfrutar :)'})
