@@ -3,6 +3,7 @@ const help = (prefix) => {
 ┏━━❉ *Acerca del BOT* ❉━━━┓
 ┣⊱ _*Nombre*_ : Soporte y Aportes BOT
 ┣⊱ *Grupo WP* : https://tinyurl.com/syagroup
+┣⊱ *Web Pag*  : https://tinyurl.com/soporteyaportes
 ┣⊱ *Grupo TG* : https://t.me/soporteyapps
 ┣⊱ *Creador* : JDMTECH
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━
