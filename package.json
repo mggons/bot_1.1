@@ -1,6 +1,6 @@
 {
-  "name": "termux-wabot",
-  "version": "0.0.2",
+  "name": "bot_1.1",
+  "version": "1.1",
   "description": "No comment",
   "main": "index.js",
   "directories": {
@@ -17,7 +17,7 @@
     "whatsapp",
     "bot"
   ],
-  "author": "MhankBarBar",
+  "author": "Mggons",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/baileys": "^3.4.1",
@@ -42,10 +42,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mhankbarbar/termux-wabot.git"
+    "url": "git+https://github.com/mggons/bot_1.1.git"
   },
   "bugs": {
-    "url": "https://github.com/mhankbarbar/termux-wabot/issues"
+    "url": "https://github.com/mggons/bot_1.1/issues"
   },
-  "homepage": "https://github.com/mhankbarbar/termux-wabot#readme"
+  "homepage": "https://github.com/mggons/bot_1.1#readme"
 }
