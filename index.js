@@ -299,6 +299,10 @@ async function starts() {
 				case 'menu':
 					client.sendMessage(from, help(prefix), text)
 					break
+					
+				case 'reglas':
+					client.sendMessage(from, rules(prefix), text)
+					break
 										
 				case 'owner':
          	   		case 'admincreator':
@@ -599,7 +603,7 @@ async function starts() {
 					
 				case 'mp3': //Añadido by JDMTECH
 					if (args.length < 1) return reply('Y el url de youtube?')
-					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3/2?url=${args[0]}&apikey=apivinz`, {method: 'get'})
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3/2?url=${args[0]}&apiKey=${apiKey3}`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumb)
 					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n*Espere un momento para ser enviado*\n*el enlace de audio a través del*\n*enlace de descarga*: ${anu.result.link}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
@@ -608,7 +612,7 @@ async function starts() {
 					break
 				case 'mp4': //Añadido by JDMTECH 
 					if (args.length < 1) return reply('Y el url de youtube?')
-					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${args[0]}&apikey=apivinz`, {method: 'get'})
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${args[0]}&apiKey=${apiKey3}`, {method: 'get'})
 					thumbnail = await getBuffer(anu.result.thumbnail)
 					teks = `*Titulo* : ${anu.result.title}\n*Tamaño* : ${anu.result.size}\n*Calidad* : ${anu.result.quality}\n*Espere un momento para ser enviado*\n*el enlace de audio a través del*\n*enlace de descarga*: ${anu.result.url_video}`
 					client.sendMessage(from, thumbnail, image, {quoted: mek, caption: teks})
