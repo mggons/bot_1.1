@@ -2,5 +2,6 @@
 	"prefix": "#",
 	"ownerNumber": "573144182071",
 	"apiKey": "0bShI58hc3RIvQ0ygHeq",
-	"apiKey2": "XinzBot"
+	"apiKey2": "-----", //Para tener su api debes registrarse en https://zeks.xyz/
+	"apiKey3": "XinzBot"
 }
